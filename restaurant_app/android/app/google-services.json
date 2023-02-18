@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "47999850982",
+    "project_id": "restaurantapp-4c6f7",
+    "storage_bucket": "restaurantapp-4c6f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:47999850982:android:b980611cd6c060a4119e27",
+        "android_client_info": {
+          "package_name": "com.combosko.genba.restaurant_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "47999850982-9tij198oacboch3qko4fvjalao9qobct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgmhJJ9as4kLAwIzuvrunhYpikl8BXBSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "47999850982-9tij198oacboch3qko4fvjalao9qobct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
