@@ -34,11 +34,41 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
+
+  # Debounce search feature
+  async: ^2.10.0
+
+  # Caches images to reduce waste
+  cached_network_image: ^3.2.3
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
+
+  firebase_core: ^2.6.1
+
+  # Bloc state management for separation from user interface
+  flutter_bloc: ^8.1.2
+
+  # Dependency Injection service locator
+  get_it: ^7.2.0
+
+  # Routing library
+  go_router: ^6.0.9
+
+  # Providers / Blocs and saved bloc state
+  provider: ^6.0.5
+
+  # Used to compare models for equality
+  equatable: ^2.0.5
+
+  # firestore library for firebase
+  cloud_firestore: ^4.4.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  lint: ^2.0.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -57,6 +87,7 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
   # assets:
