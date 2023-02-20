@@ -9,11 +9,13 @@ extension OrderMapper on OrderModel {
         'address': address
       };
 
-  Order toDomain(FoodItemModel itemModel) => Order(
+  Order toDomain() => Order(
         id: id,
-        foodItemList:
-            foodItemList?.map((foodItem) => foodItem.toDomain()).toList() ??
-                <FoodItem>[],
+        foodItemList: foodItemList
+                ?.map((foodItemModel) => foodItemModel.toDomain())
+                .toList() ??
+            <FoodItem>[],
         totalPrice: totalPrice,
+        address: address,
       );
 }
