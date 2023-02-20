@@ -2,8 +2,8 @@
 import 'package:restaurant_app/data/data_source/index.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 
-abstract class OrderBaseRepo {
-  OrderBaseRepo(this.dataSource);
+abstract class BaseOrderRepo {
+  BaseOrderRepo(this.dataSource);
 
   final OrderDataSource dataSource;
 

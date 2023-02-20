@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:restaurant_app/data/mapper_extension/index.dart';
-import 'package:restaurant_app/data/model/food_item_model.dart';
 import 'package:restaurant_app/domain/base_repo/index.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 
-class FoodRepo extends FoodBaseRepo {
+class FoodRepo extends BaseFoodRepo {
   FoodRepo(super.dataSource);
 
   @override

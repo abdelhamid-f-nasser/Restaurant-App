@@ -3,7 +3,7 @@ import 'package:restaurant_app/data/model/index.dart';
 import 'package:restaurant_app/domain/base_repo/index.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 
-class OrderRepo extends OrderBaseRepo {
+class OrderRepo extends BaseOrderRepo {
   OrderRepo(super.dataSource);
 
   @override
