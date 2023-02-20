@@ -3,20 +3,18 @@ import 'package:restaurant_app/data/model/food_item_model.dart';
 
 class UserFavouritesModel {
   UserFavouritesModel({
-    this.id,
-    this.foodItemList,
     this.userId,
+    this.foodItemList,
   });
 
-  final String? id;
-  final List<FoodItemModel>? foodItemList;
   final String? userId;
+  final List<FoodItemModel>? foodItemList;
 
   factory UserFavouritesModel.fromSnapshot(
     DocumentSnapshot snapshot,
   ) {
     return UserFavouritesModel(
-      id: snapshot.id,
+      userId: snapshot.id,
       foodItemList: snapshot.get('food_item_list') == null
           ? []
           : List<FoodItemModel>.from(
@@ -24,7 +22,6 @@ class UserFavouritesModel {
                     (json) => FoodItemModel.fromJson(json),
                   ),
             ),
-      userId: snapshot.get('user_id'),
     );
   }
 }
