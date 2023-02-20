@@ -25,4 +25,12 @@ class FoodDataSource extends BaseDataSource {
               sink.add(data.docs.map((e) => e.data()).toList()),
         ),
       );
+
+  Future<List<FoodItemModel>> getFood() async {
+    final foodSnapshots = await _fireStoreFoodCollection.get();
+
+    return foodSnapshots.docs
+        .map((snapshot) => FoodItemModel.fromSnapshot(snapshot))
+        .toList();
+  }
 }
