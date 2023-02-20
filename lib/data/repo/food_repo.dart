@@ -8,8 +8,12 @@ class FoodRepo extends BaseFoodRepo {
   FoodRepo(super.dataSource);
 
   @override
-  Future<List<FoodItem>> getFoodItems() async {
-    final List<FoodItemModel> foodModelList = await dataSource.getFood();
-    return foodModelList.map((foodModelItem) => foodModelItem.toDomain()).toList();
-  }
+  Stream<List<FoodItem>> getFoodItems() => dataSource
+      .retrieveFoodStream()
+      .transform(
+        StreamTransformer.fromHandlers(
+          handleData: (data, sink) => sink.add(
+              data.map((foodItemModel) => foodItemModel.toDomain()).toList()),
+        ),
+      );
 }

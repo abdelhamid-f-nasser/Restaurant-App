@@ -7,5 +7,5 @@ abstract class BaseFoodRepo {
 
   final FoodDataSource dataSource;
 
-  Future<List<FoodItem>> getFoodItems();
+  Stream<List<FoodItem>> getFoodItems();
 }
