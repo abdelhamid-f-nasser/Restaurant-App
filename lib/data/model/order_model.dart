@@ -6,11 +6,13 @@ class OrderModel {
     this.id,
     this.foodItemList,
     this.totalPrice,
+    this.address,
   });
 
   final String? id;
   final List<FoodItemModel>? foodItemList;
   final double? totalPrice;
+  final String? address;
 
   factory OrderModel.fromSnapshot(
     DocumentSnapshot snapshot,
@@ -25,6 +27,7 @@ class OrderModel {
                   ),
             ),
       totalPrice: snapshot.get('total_price'),
+        address: snapshot.get('address'),
     );
   }
 }
