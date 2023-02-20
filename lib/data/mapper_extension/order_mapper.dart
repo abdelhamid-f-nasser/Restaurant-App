@@ -18,4 +18,14 @@ extension OrderMapper on OrderModel {
         totalPrice: totalPrice,
         address: address,
       );
+
+  static OrderModel fromDomain(Order order) => OrderModel(
+        id: order.id,
+        foodItemList: order.foodItemList
+                ?.map((foodItem) => FoodMapper.fromDomain(foodItem))
+                .toList() ??
+            <FoodItemModel>[],
+        totalPrice: order.totalPrice,
+        address: order.address,
+      );
 }

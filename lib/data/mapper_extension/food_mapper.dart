@@ -16,4 +16,12 @@ extension FoodMapper on FoodItemModel {
         imageUrl: imageUrl,
         price: price,
       );
+
+  static FoodItemModel fromDomain(FoodItem foodItem) => FoodItemModel(
+        id: foodItem.id,
+        name: foodItem.name,
+        description: foodItem.description,
+        imageUrl: foodItem.imageUrl,
+        price: foodItem.price,
+      );
 }
