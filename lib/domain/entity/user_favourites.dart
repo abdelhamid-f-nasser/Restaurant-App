@@ -4,12 +4,10 @@ import 'package:restaurant_app/domain/entity/index.dart';
 class UserFavourites{
 
   UserFavourites({
-    this.id,
-    this.foodItemList,
     this.userId,
+    this.foodItemList,
   });
 
-  final String? id;
-  final List<FoodItem>? foodItemList;
   final String? userId;
+  final List<FoodItem>? foodItemList;
 }
