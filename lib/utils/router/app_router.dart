@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -38,7 +37,8 @@ class AppRouter {
           color: CupertinoColors.systemRed,
           child: Center(
             child: ContainerPage(
-                tabName: state.params['tab'] ?? BottomTabBarRoutes.favourite),
+                tabName: state.params['tab'] ?? BottomTabBarRoutes.favourite,
+            ),
           ),
         ),
       ),

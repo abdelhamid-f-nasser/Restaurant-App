@@ -45,6 +45,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
 
+  # Used to compare models for equality
+  equatable: ^2.0.5
+
   firebase_core: ^2.6.1
 
   # Bloc state management for separation from user interface
@@ -59,23 +62,16 @@ dependencies:
   # Providers / Blocs and saved bloc state
   provider: ^6.0.5
 
-  # Used to compare models for equality
-  equatable: ^2.0.5
-
   # firestore library for firebase
   cloud_firestore: ^4.4.2
 
 dev_dependencies:
+  flutter_lints: ^2.0.1
+
   flutter_test:
     sdk: flutter
-  lint: ^2.0.1
 
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^2.0.1
+  lint: ^2.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
