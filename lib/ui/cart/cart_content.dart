@@ -56,7 +56,7 @@ class CartContent extends StatelessWidget {
                   PriceFooter(
                     totalPrice: state.totalPrice?.toStringAsFixed(2) ?? '0.00',
                     height: footerHeight,
-                    orderSummary: state.order
+                    orderSummary: state.order,
                   ),
                 ],
               );

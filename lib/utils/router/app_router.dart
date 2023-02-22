@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/domain/entity/food.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 import 'package:restaurant_app/ui/cart/cart_page.dart';
 import 'package:restaurant_app/ui/checkout/checkout_page.dart';

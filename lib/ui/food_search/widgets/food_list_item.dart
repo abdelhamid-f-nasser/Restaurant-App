@@ -75,7 +75,7 @@ class FoodListItem extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    '\$ ${item.price?.toStringAsFixed(2)}',
+                    '\$ ${item.price.toStringAsFixed(2)}',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                     style: const TextStyle(

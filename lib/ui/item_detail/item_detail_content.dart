@@ -77,7 +77,7 @@ class ItemDetailContent extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '\$ ${item.price?.toStringAsFixed(2)}',
+                      '\$ ${item.price.toStringAsFixed(2)}',
                       style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
