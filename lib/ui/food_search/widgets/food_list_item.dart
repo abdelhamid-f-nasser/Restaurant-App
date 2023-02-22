@@ -13,12 +13,14 @@ class FoodListItem extends StatelessWidget {
     this.isAddToCartButtonShowing = false,
     this.previousPageTitle,
     this.itemCount,
+    this.isSummary = false
   });
 
   final FoodItem item;
   final bool? isAddToCartButtonShowing;
   final String? previousPageTitle;
   final int? itemCount;
+  final bool? isSummary;
 
   factory FoodListItem.withCartButton({
     required FoodItem item,
@@ -41,6 +43,18 @@ class FoodListItem extends StatelessWidget {
         previousPageTitle: previousPageTitle,
       );
 
+  factory FoodListItem.summary({
+    required FoodItem item,
+    String? previousPageTitle,
+    int? itemCount,
+  }) =>
+      FoodListItem(
+        item: item,
+        itemCount: itemCount,
+        previousPageTitle: previousPageTitle,
+        isSummary: true,
+      );
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -48,15 +62,18 @@ class FoodListItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            width: context.w * .25,
-            height: context.h * .1,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(item.imageUrl ?? ''),
-                fit: BoxFit.cover,
+          Visibility(
+            visible: !(isSummary ?? false),
+            child: Container(
+              width: context.w * .25,
+              height: context.h * .1,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: CachedNetworkImageProvider(item.imageUrl ?? ''),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(12),
               ),
-              borderRadius: BorderRadius.circular(12),
             ),
           ),
           Expanded(

@@ -68,6 +68,9 @@ dependencies:
   # collection operations
   collection: ^1.17.0
 
+  # hooks for state management
+  flutter_hooks: ^0.18.6
+
 dev_dependencies:
   flutter_lints: ^2.0.1
 

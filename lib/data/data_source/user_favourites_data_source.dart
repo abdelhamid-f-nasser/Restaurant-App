@@ -31,7 +31,7 @@ class UserFavouritesDataSource extends BaseDataSource {
 
   Future<void> toggleAddFavouriteForUser({
     required String userId,
-    required FoodItem foodItem,
+    required FoodItem foodItemModel,
   }) async {
     late final UserFavouritesModel userFavouritesModel;
     try {
@@ -46,16 +46,16 @@ class UserFavouritesDataSource extends BaseDataSource {
           UserFavouritesModel(userId: userId, foodItemList: const []);
     }
 
-    if (userFavouritesModel.foodItemList?.any((element) => foodItem.id == element.id) == true) {
+    if (userFavouritesModel.foodItemList?.any((element) => foodItemModel.id == element.id) == true) {
       return _removeFavouriteForUser(
         userId: userId,
-        foodItem: foodItem,
+        foodItem: foodItemModel,
         userFavouritesModel: userFavouritesModel,
       );
     }
     return _addFavouriteForUser(
       userId: userId,
-      foodItem: foodItem,
+      foodItem: foodItemModel,
       userFavouritesModel: userFavouritesModel,
     );
   }

@@ -29,5 +29,5 @@ class UserFavouritesRepo extends BaseUserFavouritesRepo {
     required String userId,
     required FoodItem foodItem,
   }) =>
-      dataSource.toggleAddFavouriteForUser(userId: userId, foodItem: foodItem);
+      dataSource.toggleAddFavouriteForUser(userId: userId, foodItemModel: foodItem);
 }

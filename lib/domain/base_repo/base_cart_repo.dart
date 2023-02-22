@@ -11,5 +11,11 @@ abstract class BaseCartRepo {
     required FoodItem foodItem,
   });
 
+  Future<void> checkoutOrder({
+    required String userId,
+    required Order order,
+    required String address,
+  });
+
   Stream<Order> getOrderItems(String userId);
 }

@@ -7,6 +7,7 @@ import 'package:restaurant_app/data/repo/user_favourites_repo.dart';
 import 'package:restaurant_app/domain/base_repo/base_user_favourites_repo.dart';
 import 'package:restaurant_app/domain/base_repo/index.dart';
 import 'package:restaurant_app/ui/cart/cubit/index.dart';
+import 'package:restaurant_app/ui/checkout/cubit/index.dart';
 import 'package:restaurant_app/ui/food_search/cubit/food_cubit.dart';
 import 'package:restaurant_app/ui/user_favourites/cubit/user_favourites_cubit.dart';
 
@@ -24,36 +25,41 @@ class DependencyInjector {
     locator.registerFactory<FoodCubit>(
       () => FoodCubit(locator()),
     );
-    /// endregion
 
+    /// endregion
 
     /// region Favourites
     locator.registerLazySingleton<UserFavouritesDataSource>(
-          () => UserFavouritesDataSource(firestoreInstance: FirebaseFirestore.instance),
+      () => UserFavouritesDataSource(
+        firestoreInstance: FirebaseFirestore.instance,
+      ),
     );
     locator.registerLazySingleton<BaseUserFavouritesRepo>(
-          () => UserFavouritesRepo(locator()),
+      () => UserFavouritesRepo(locator()),
     );
     locator.registerFactory<UserFavouritesCubit>(
-          () => UserFavouritesCubit(locator()),
+      () => UserFavouritesCubit(locator()),
     );
-    /// endregion
 
+    /// endregion
 
     /// region Cart
     locator.registerLazySingleton<CartDataSource>(
-          () => CartDataSource(firestoreInstance: FirebaseFirestore.instance),
+      () => CartDataSource(firestoreInstance: FirebaseFirestore.instance),
     );
     locator.registerLazySingleton<BaseCartRepo>(
-          () => CartRepo(locator()),
+      () => CartRepo(locator()),
     );
     locator.registerFactory<CartCubit>(
-          () => CartCubit(locator()),
+      () => CartCubit(locator()),
     );
+
     /// endregion
 
-
     /// region Checkout
+    locator.registerFactory<CheckoutCubit>(
+      () => CheckoutCubit(locator()),
+    );
 
     /// endregion
   }

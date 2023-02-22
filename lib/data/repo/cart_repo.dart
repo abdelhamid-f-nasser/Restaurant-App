@@ -16,6 +16,15 @@ class CartRepo extends BaseCartRepo {
   }
 
   @override
+  Future<void> checkoutOrder({
+    required String userId,
+    required Order order,
+    required String address,
+  }) async {
+    await dataSource.checkoutOrder(userId: userId, orderModel: order.fromDomain(), address: address);
+  }
+
+  @override
   Stream<Order> getOrderItems(String userId) =>
       dataSource.retrieveOrderForUser(userId).transform(
             StreamTransformer.fromHandlers(

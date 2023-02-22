@@ -36,10 +36,8 @@ class AppRouter {
       pageBuilder: (context, state) => CupertinoPage(
         name: MainRoutes.container.route.name,
         key: state.pageKey,
-        child: Center(
-          child: ContainerPage(
-            tabName: state.params['tab'] ?? BottomTabBarRoutes.favourite,
-          ),
+        child: ContainerPage(
+          tabName: state.params['tab'] ?? BottomTabBarRoutes.favourite,
         ),
       ),
     ),
@@ -58,8 +56,10 @@ class AppRouter {
         final Order orderSummary = state.extra as Order? ?? const Order();
         return CupertinoPage(
           key: state.pageKey,
-          child: CheckoutPage(
-            orderSummary: orderSummary,
+          child: Center(
+            child: CheckoutPage(
+              orderSummary: orderSummary,
+            ),
           ),
         );
       },

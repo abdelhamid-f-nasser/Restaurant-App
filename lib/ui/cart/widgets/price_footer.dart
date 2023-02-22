@@ -9,11 +9,13 @@ class PriceFooter extends StatelessWidget {
     required this.totalPrice,
     this.height,
     required this.orderSummary,
+    required this.isNextEnabled,
   });
 
   final String totalPrice;
   final double? height;
   final Order? orderSummary;
+  final bool isNextEnabled;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class PriceFooter extends StatelessWidget {
         color: CupertinoColors.white,
         height: height ?? context.h * .09,
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.w * .02),
+          padding: EdgeInsets.symmetric(horizontal: context.w * .05),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -49,10 +51,10 @@ class PriceFooter extends StatelessWidget {
               ),
               CupertinoButton.filled(
                 borderRadius: BorderRadius.circular(20),
-                onPressed: () => _navigateToCheckoutPage(
+                onPressed: isNextEnabled ? () => _navigateToCheckoutPage(
                   context: context,
                   order: orderSummary,
-                ),
+                ) : null,
                 child: const Text('Next'),
               )
             ],

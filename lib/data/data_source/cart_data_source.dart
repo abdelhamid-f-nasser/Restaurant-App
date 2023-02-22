@@ -13,6 +13,9 @@ class CartDataSource extends BaseDataSource {
   CollectionReference get _fireStoreCartCollection =>
       firestoreInstance.collection(FirestoreCollection.cart.path);
 
+  CollectionReference get _fireStoreOrdersCollection =>
+      firestoreInstance.collection(FirestoreCollection.orders.path);
+
   Future<void> upsetOrder({
     required String userId,
     required FoodItemModel foodItem,
@@ -60,7 +63,9 @@ class CartDataSource extends BaseDataSource {
           orderSummary?.copyWith(itemCount: orderSummary.itemCount + 1) ??
               const OrderItemModel();
     } else {
-      orderModel.orderSummary?.add(OrderItemModel(foodItem: foodItem, itemCount: 1),);
+      orderModel.orderSummary?.add(
+        OrderItemModel(foodItem: foodItem, itemCount: 1),
+      );
       requestModel = orderModel.copyWith(orderSummary: orderModel.orderSummary);
     }
 
@@ -80,5 +85,26 @@ class CartDataSource extends BaseDataSource {
         },
       ),
     );
+  }
+
+  Future<void> checkoutOrder(
+      {required String address,
+      required OrderModel orderModel,
+      required String userId}) async {
+    OrderModel? requestModel;
+    requestModel = orderModel.copyWith(address: address);
+
+    await _fireStoreOrdersCollection
+        .doc(userId)
+        .set(requestModel.toJson())
+        .then((value) => _emptyCart(
+              userId: userId,
+            ));
+  }
+
+  Future<void> _emptyCart({
+    required String userId,
+  }) async {
+    await _fireStoreCartCollection.doc(userId).delete();
   }
 }
