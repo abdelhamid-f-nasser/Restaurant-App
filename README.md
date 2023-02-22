@@ -1,7 +1,24 @@
-# restaurant_app
+# Restaurant Application
 
-Flutter Cupertino Restaurant and food application using firebase and clean architecture.
+Flutter Cupertino food application using firebase and clean architecture.
 
+## Screenshots
+<table>
+  <tr>
+    <td><img src="https://i.imgur.com/mEFc6YP.png" height=350></td>
+    <td><img src="https://i.imgur.com/qSoxSht.png" height=350></td>
+    <td><img src="https://i.imgur.com/JDOeWys.png" height=350></td>
+    <td><img src="https://i.imgur.com/flU2vRu.png" height=350></td>
+    <td><img src="https://i.imgur.com/jSaQQ2W.png" height=350></td>
+  </tr>
+  <tr>
+    <td>Food Search Page</td>
+     <td>Favourite page</td>
+     <td>Item details page</td>
+     <td>Cart page</td>
+     <td>Checkout page</td>
+  </tr>
+ </table>
 
 ## Future Steps:
 - Domain and Data Mappers should be separated to Mapper Classes
