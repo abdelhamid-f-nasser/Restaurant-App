@@ -33,12 +33,9 @@ class AppRouter {
       pageBuilder: (context, state) => CupertinoPage(
         name: MainRoutes.container.route.name,
         key: state.pageKey,
-        child: ColoredBox(
-          color: CupertinoColors.systemRed,
-          child: Center(
-            child: ContainerPage(
-                tabName: state.params['tab'] ?? BottomTabBarRoutes.favourite,
-            ),
+        child: Center(
+          child: ContainerPage(
+            tabName: state.params['tab'] ?? BottomTabBarRoutes.favourite,
           ),
         ),
       ),
