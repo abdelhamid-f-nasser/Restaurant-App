@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 
-class FoodItemModel {
-  FoodItemModel({
+class FoodItemModel extends Equatable {
+  const FoodItemModel({
     this.id,
     this.name,
     this.description,
@@ -31,10 +32,14 @@ class FoodItemModel {
     Map<String, dynamic> json,
   ) {
     return FoodItemModel(
+      id: json['id'],
       name: json['name'],
       description: json['description'],
       imageUrl: json['image_url'],
       price: json['price'],
     );
   }
+
+  @override
+  List<Object?> get props => [id];
 }
