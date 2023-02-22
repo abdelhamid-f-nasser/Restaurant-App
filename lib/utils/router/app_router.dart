@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant_app/domain/entity/food.dart';
+import 'package:restaurant_app/domain/entity/index.dart';
 import 'package:restaurant_app/ui/cart/cart_page.dart';
+import 'package:restaurant_app/ui/checkout/checkout_page.dart';
 import 'package:restaurant_app/ui/container/index.dart';
 import 'package:restaurant_app/ui/item_detail/index.dart';
 import 'package:restaurant_app/utils/router/index.dart';
@@ -48,25 +50,20 @@ class AppRouter {
       pageBuilder: (context, state) => CupertinoPage(
         key: state.pageKey,
         child: const CartPage(),
-        //Todo: Add arguments
-        /*arguments: state.params*/
-        /*args: state.extra as null,*/
       ),
     ),
     GoRoute(
       name: MainRoutes.checkout.route.name,
       path: MainRoutes.checkout.route.path,
-      pageBuilder: (context, state) => CupertinoPage(
-        key: state.pageKey,
-        child: ColoredBox(
-          color: CupertinoColors.white,
-          child: Center(
-            child: Text(
-              MainRoutes.checkout.route.path,
-            ),
+      pageBuilder: (context, state) {
+        final Order orderSummary = state.extra as Order? ?? const Order();
+        return CupertinoPage(
+          key: state.pageKey,
+          child: CheckoutPage(
+            orderSummary: orderSummary,
           ),
-        ),
-      ),
+        );
+      },
     ),
     GoRoute(
       name: MainRoutes.foodItemDetails.route.name,

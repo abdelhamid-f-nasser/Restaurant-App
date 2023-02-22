@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:restaurant_app/domain/entity/food.dart';
+import 'package:restaurant_app/domain/entity/index.dart';
 import 'package:restaurant_app/ui/cart/cubit/index.dart';
 import 'package:restaurant_app/ui/cart/widgets/index.dart';
 import 'package:restaurant_app/ui/food_search/widgets/index.dart';
@@ -36,14 +36,17 @@ class CartContent extends StatelessWidget {
                       bottom: footerHeight,
                     ),
                     child: ListView.separated(
-                      itemCount: state.foodList.length,
+                      itemCount: state.order?.orderSummary?.length ?? 0,
                       itemBuilder: (context, index) {
-                        final FoodItem currentItem = state.foodList[index];
+                        final OrderItem currentItem =
+                            state.order?.orderSummary?[index] ??
+                                const OrderItem();
                         return Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: FoodListItem(
-                            item: currentItem,
+                          child: FoodListItem.cartItem(
+                            item: currentItem.foodItem ?? const FoodItem(),
                             previousPageTitle: pageTitle,
+                            itemCount: currentItem.itemCount,
                           ),
                         );
                       },
@@ -53,6 +56,7 @@ class CartContent extends StatelessWidget {
                   PriceFooter(
                     totalPrice: state.totalPrice?.toStringAsFixed(2) ?? '0.00',
                     height: footerHeight,
+                    orderSummary: state.order
                   ),
                 ],
               );

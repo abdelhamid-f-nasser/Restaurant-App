@@ -1,15 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:restaurant_app/domain/entity/order.dart';
 import 'package:restaurant_app/utils/index.dart';
+import 'package:restaurant_app/utils/router/index.dart';
 
 class PriceFooter extends StatelessWidget {
   const PriceFooter({
     super.key,
     required this.totalPrice,
     this.height,
+    required this.orderSummary,
   });
 
   final String totalPrice;
   final double? height;
+  final Order? orderSummary;
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +49,26 @@ class PriceFooter extends StatelessWidget {
               ),
               CupertinoButton.filled(
                 borderRadius: BorderRadius.circular(20),
-                onPressed: () {},
+                onPressed: () => _navigateToCheckoutPage(
+                  context: context,
+                  order: orderSummary,
+                ),
                 child: const Text('Next'),
               )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _navigateToCheckoutPage({
+    required BuildContext context,
+    required Order? order,
+  }) {
+    MainRoutes.checkout.navigateToCheckoutPage(
+      context,
+      order: order ?? const Order(),
     );
   }
 }

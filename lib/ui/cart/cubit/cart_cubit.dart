@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:restaurant_app/domain/base_repo/index.dart';
-import 'package:restaurant_app/domain/entity/food.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 import 'package:restaurant_app/utils/enums/index.dart';
 
@@ -20,7 +19,11 @@ class CartCubit extends Cubit<CartState> {
 
     _orderStream = repo.getOrderItems(userId).listen((event) {
       emit(
-        state.copyWith(foodList: event.foodItemList, status: PageState.success, totalPrice: event.totalPrice),
+        state.copyWith(
+          order: event,
+          status: PageState.success,
+          totalPrice: event.orderTotal,
+        ),
       );
     });
   }

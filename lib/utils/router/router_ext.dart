@@ -4,14 +4,21 @@ import 'package:restaurant_app/domain/entity/index.dart';
 import 'package:restaurant_app/utils/router/route_names.dart';
 
 extension RouterExt on MainRoutes {
-
-  void navigateToItemDetails(BuildContext context, {required String previousPageTitle, required FoodItem foodItem}) {
+  void navigateToItemDetails(BuildContext context,
+      {required String previousPageTitle, required FoodItem foodItem}) {
     context.pushNamed(
       MainRoutes.foodItemDetails.name,
-      extra: {
-        'previousPageTitle': previousPageTitle,
-        'foodItem': foodItem
-      },
+      extra: {'previousPageTitle': previousPageTitle, 'foodItem': foodItem},
+    );
+  }
+
+  void navigateToCheckoutPage(
+    BuildContext context, {
+    required Order order,
+  }) {
+    context.pushNamed(
+      MainRoutes.checkout.name,
+      extra: order,
     );
   }
 }

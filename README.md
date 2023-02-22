@@ -22,3 +22,4 @@ Flutter Cupertino Restaurant and food application using firebase and clean archi
 - Add favourite Icon toggle (shows state of favourite in item details)
 - Add notices for actions
 - Group items by count
+- !! decrement item from count or remove !!

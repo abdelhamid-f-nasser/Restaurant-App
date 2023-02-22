@@ -12,20 +12,16 @@ class CartRepo extends BaseCartRepo {
     required String userId,
     required FoodItem foodItem,
   }) async {
-    dataSource.upsetOrder(userId: userId, foodItem: foodItem);
+    dataSource.upsetOrder(userId: userId, foodItem: foodItem.fromDomain());
   }
 
   @override
-  Stream<Cart> getOrderItems(String userId) =>
-    dataSource.retrieveOrderForUser(userId).transform(
-          StreamTransformer.fromHandlers(
-            handleData: (data, sink) => sink.add(
-              data?.toDomain() ??
-                  Cart(
-                    userId: userId,
-                    foodItemList: const [],
-                  ),
+  Stream<Order> getOrderItems(String userId) =>
+      dataSource.retrieveOrderForUser(userId).transform(
+            StreamTransformer.fromHandlers(
+              handleData: (data, sink) => sink.add(
+                data?.toDomain() ?? Order(id: userId),
+              ),
             ),
-          ),
-        );
+          );
 }

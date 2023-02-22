@@ -1,28 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'cart_cubit.dart';
 
 class CartState extends Equatable {
   const CartState({
-    this.foodList = const [],
+    this.order = const Order(),
     this.status = PageState.initial,
     this.totalPrice = 0.00,
   });
 
-  final List<FoodItem> foodList;
+  final Order? order;
   final double? totalPrice;
   final PageState status;
 
   @override
-  List<Object?> get props => [foodList, status];
+  List<Object?> get props => [order, status];
 
   CartState copyWith({
-    List<FoodItem>? foodList,
-    PageState? status,
+    Order? order,
     double? totalPrice,
+    PageState? status,
   }) {
     return CartState(
-      foodList: foodList ?? this.foodList,
-      status: status ?? this.status,
+      order: order ?? this.order,
       totalPrice: totalPrice ?? this.totalPrice,
+      status: status ?? this.status,
     );
   }
 }

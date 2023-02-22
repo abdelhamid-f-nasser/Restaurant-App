@@ -9,14 +9,14 @@ class FoodItem extends Equatable {
     this.name,
     this.description,
     this.imageUrl,
-    this.price,
+    this.price = 0.0,
   });
 
   final String? id;
   final String? name;
   final String? description;
   final String? imageUrl;
-  final double? price;
+  final double price;
 
   @override
   List<Object?> get props => [id, name, description, imageUrl, price];

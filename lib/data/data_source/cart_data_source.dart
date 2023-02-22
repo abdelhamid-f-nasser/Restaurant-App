@@ -6,7 +6,6 @@ import 'package:restaurant_app/data/data_source/base_data_source.dart';
 import 'package:restaurant_app/data/enums/index.dart';
 import 'package:restaurant_app/data/mapper_extension/index.dart';
 import 'package:restaurant_app/data/model/index.dart';
-import 'package:restaurant_app/domain/entity/food.dart';
 
 class CartDataSource extends BaseDataSource {
   CartDataSource({required super.firestoreInstance});
@@ -16,19 +15,22 @@ class CartDataSource extends BaseDataSource {
 
   Future<void> upsetOrder({
     required String userId,
-    required FoodItem foodItem,
+    required FoodItemModel foodItem,
   }) async {
-    late CartModel orderModel;
+    late OrderModel orderModel;
     try {
       orderModel = await retrieveOrderForUser(userId).firstOrNull ??
-          CartModel(
-            userId: userId,
-            foodItemList: const [],
-            totalPrice: 0.0,
+          OrderModel(
+            id: userId,
+            orderSummary: const [],
             address: '',
           );
     } catch (exception) {
-      orderModel = CartModel(userId: userId, foodItemList: const []);
+      orderModel = OrderModel(
+        id: userId,
+        orderSummary: const [],
+        address: '',
+      );
     }
 
     return _addFoodItemToOrder(
@@ -40,29 +42,40 @@ class CartDataSource extends BaseDataSource {
 
   Future<void> _addFoodItemToOrder({
     required String userId,
-    required CartModel orderModel,
-    required FoodItem foodItem,
+    required OrderModel orderModel,
+    required FoodItemModel foodItem,
   }) async {
-    orderModel.foodItemList?.add(foodItem.fromDomain());
-    final double totalPrice =
-        (orderModel.totalPrice ?? 0.0) + (foodItem.price ?? 0.0);
-    final CartModel requestModel = orderModel.copyWith(
-      foodItemList: orderModel.foodItemList,
-      totalPrice: totalPrice,
-    );
+    //check if the Food item already exists
+    OrderModel? requestModel;
+    final itemIndex = orderModel.orderSummary
+            ?.map((e) => e.foodItem)
+            .toList()
+            .indexOf(foodItem) ??
+        -1;
+    if (itemIndex > -1) {
+      requestModel = orderModel;
+      final orderSummary = requestModel.orderSummary?[itemIndex];
 
-    await _fireStoreCartCollection.doc(userId).set(requestModel.toMap());
+      requestModel.orderSummary?[itemIndex] =
+          orderSummary?.copyWith(itemCount: orderSummary.itemCount + 1) ??
+              const OrderItemModel();
+    } else {
+      orderModel.orderSummary?.add(OrderItemModel(foodItem: foodItem, itemCount: 1),);
+      requestModel = orderModel.copyWith(orderSummary: orderModel.orderSummary);
+    }
+
+    await _fireStoreCartCollection.doc(userId).set(requestModel.toJson());
   }
 
-  Stream<CartModel?> retrieveOrderForUser(String userId) {
+  Stream<OrderModel?> retrieveOrderForUser(String userId) {
     return _fireStoreCartCollection.doc(userId).snapshots().transform(
       StreamTransformer<DocumentSnapshot<Map<String, dynamic>>,
-          CartModel?>.fromHandlers(
+          OrderModel?>.fromHandlers(
         handleData: (data, sink) {
           if (data.exists) {
-            sink.add(CartModel.fromSnapshot(data));
+            sink.add(OrderModel.fromSnapshot(data));
           } else {
-            sink.add(const CartModel());
+            sink.add(const OrderModel());
           }
         },
       ),

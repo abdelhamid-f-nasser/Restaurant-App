@@ -7,7 +7,7 @@ extension FoodItemModelMapper on FoodItemModel {
   /// Returns Map converted from [FoodItemModel]
   ///
   /// used in sending data to any persistence layer
-  Map<String, dynamic> toMap() => {
+  Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
         'description': description,
@@ -23,7 +23,7 @@ extension FoodItemModelMapper on FoodItemModel {
         name: name,
         description: description,
         imageUrl: imageUrl,
-        price: price,
+        price: price ?? 0.0,
       );
 }
 

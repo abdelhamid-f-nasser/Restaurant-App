@@ -9,7 +9,7 @@ extension UserFavouritesModelMapper on UserFavouritesModel {
   ///
   /// used in sending data to any persistence layer
   Map<String, dynamic> toMap() => {
-        'food_item_list': foodItemList?.map((e) => e.toMap()).toList(),
+        'food_item_list': foodItemList?.map((e) => e.toJson()).toList(),
       };
 
   /// Returns the entity [UserFavourites] of the Domain Layer after converting

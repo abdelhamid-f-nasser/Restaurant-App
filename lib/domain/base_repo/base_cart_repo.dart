@@ -11,5 +11,5 @@ abstract class BaseCartRepo {
     required FoodItem foodItem,
   });
 
-  Stream<Cart> getOrderItems(String userId);
+  Stream<Order> getOrderItems(String userId);
 }
