@@ -1,17 +1,20 @@
 
+import 'package:equatable/equatable.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 
-class Order{
+class Cart extends Equatable{
 
-  Order({
-    this.id,
+  const Cart({
+    this.userId,
     this.foodItemList,
     this.totalPrice,
     this.address,
   });
-
-  final String? id;
   final List<FoodItem>? foodItemList;
   final double? totalPrice;
   final String? address;
+  final String? userId;
+
+  @override
+  List<Object?> get props => [userId];
 }
