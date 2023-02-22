@@ -1,8 +1,10 @@
 
 
-class FoodItem {
+import 'package:equatable/equatable.dart';
 
-  FoodItem({
+class FoodItem extends Equatable {
+
+  const FoodItem({
     this.id,
     this.name,
     this.description,
@@ -15,4 +17,7 @@ class FoodItem {
   final String? description;
   final String? imageUrl;
   final double? price;
+
+  @override
+  List<Object?> get props => [id, name, description, imageUrl, price];
 }
