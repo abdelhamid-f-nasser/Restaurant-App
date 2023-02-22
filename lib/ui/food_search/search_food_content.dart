@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:restaurant_app/domain/entity/food.dart';
 import 'package:restaurant_app/ui/food_search/cubit/food_cubit.dart';
+import 'package:restaurant_app/ui/food_search/widgets/index.dart';
 import 'package:restaurant_app/utils/enums/index.dart';
 
 class SearchFoodContent extends StatelessWidget {
@@ -15,11 +18,19 @@ class SearchFoodContent extends StatelessWidget {
           case PageState.loading:
             return const CupertinoActivityIndicator();
           case PageState.success:
-            return ListView.builder(
+            return ListView.separated(
               itemCount: state.foodList.length,
               itemBuilder: (context, index) {
-                return Text(state.foodList[index].name ?? '');
+                final FoodItem currentItem = state.foodList[index];
+                return Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: FoodListItem.withCartButton(
+                    item: currentItem,
+                    previousPageTitle: 'search',
+                  ),
+                );
               },
+              separatorBuilder: (context, index) => const Divider(),
             );
           case PageState.error:
             return const Text('There is an error');

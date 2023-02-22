@@ -1,8 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
-import 'package:restaurant_app/ui/home/container_page.dart';
+import 'package:restaurant_app/domain/entity/food.dart';
+import 'package:restaurant_app/ui/cart/cart_page.dart';
+import 'package:restaurant_app/ui/container/index.dart';
+import 'package:restaurant_app/ui/item_detail/index.dart';
 import 'package:restaurant_app/utils/router/index.dart';
 
 /// Contains All available routes in the application
@@ -45,14 +47,7 @@ class AppRouter {
       path: MainRoutes.cart.route.path,
       pageBuilder: (context, state) => CupertinoPage(
         key: state.pageKey,
-        child: ColoredBox(
-          color: CupertinoColors.white,
-          child: Center(
-            child: Text(
-              MainRoutes.cart.route.path,
-            ),
-          ),
-        ),
+        child: const CartPage(),
         //Todo: Add arguments
         /*arguments: state.params*/
         /*args: state.extra as null,*/
@@ -76,17 +71,18 @@ class AppRouter {
     GoRoute(
       name: MainRoutes.foodItemDetails.route.name,
       path: MainRoutes.foodItemDetails.route.path,
-      pageBuilder: (context, state) => CupertinoPage(
-        key: state.pageKey,
-        child: ColoredBox(
-          color: CupertinoColors.white,
-          child: Center(
-            child: Text(
-              MainRoutes.foodItemDetails.route.path,
-            ),
+      pageBuilder: (context, state) {
+        final extrasMap = state.extra as Map<String, dynamic>?;
+        final pageTitle = extrasMap?['previousPageTitle'];
+        final foodItem = extrasMap?['foodItem'] as FoodItem?;
+        return CupertinoPage(
+          key: state.pageKey,
+          child: ItemDetailPage(
+            item: foodItem ?? const FoodItem(),
+            previousPageTitle: pageTitle,
           ),
-        ),
-      ),
+        );
+      },
     )
   ];
 }

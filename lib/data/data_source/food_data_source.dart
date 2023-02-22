@@ -16,7 +16,7 @@ class FoodDataSource extends BaseDataSource {
       .withConverter<FoodItemModel>(
         fromFirestore: (snapshot, options) =>
             FoodItemModel.fromSnapshot(snapshot),
-        toFirestore: (value, options) => value.toJson(),
+        toFirestore: (value, options) => value.toMap(),
       )
       .snapshots()
       .transform(

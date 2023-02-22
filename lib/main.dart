@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/di/dependency_injector.dart';
 import 'package:restaurant_app/firebase_options.dart';
+import 'package:restaurant_app/ui/cart/cubit/index.dart';
 
 import 'package:restaurant_app/utils/router/index.dart';
 
@@ -25,13 +27,20 @@ class MyApp extends StatelessWidget {
         DeviceOrientation.portraitDown,
       ],
     );
-    return CupertinoApp.router(
-      debugShowCheckedModeBanner: false,
-      routeInformationParser: AppRouter.router.routeInformationParser,
-      routerDelegate: AppRouter.router.routerDelegate,
-      routeInformationProvider: AppRouter.router.routeInformationProvider,
-      title: 'Restaurant App',
-      theme: const CupertinoThemeData(brightness: Brightness.light),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<CartCubit>(
+          create: (context) => CartCubit(locator()),
+        ),
+      ],
+      child: CupertinoApp.router(
+        debugShowCheckedModeBanner: false,
+        routeInformationParser: AppRouter.router.routeInformationParser,
+        routerDelegate: AppRouter.router.routerDelegate,
+        routeInformationProvider: AppRouter.router.routeInformationProvider,
+        title: 'Restaurant App',
+        theme: const CupertinoThemeData(brightness: Brightness.light),
+      ),
     );
   }
 }

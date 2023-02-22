@@ -7,7 +7,7 @@ enum MainRoutes {
     RouteModel(name: 'Container', path: '/:tab(${BottomTabBarRoutes.tabs})'),
   ),
   foodItemDetails(
-    RouteModel(name: 'Item Detail', path: '/itemDetail/:id'),
+    RouteModel(name: 'Item Detail', path: '/itemDetail'),
   ),
   cart(
     RouteModel(name: 'Cart', path: '/cart'),
