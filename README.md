@@ -1,16 +1,24 @@
 # restaurant_app
 
-A new Flutter project.
+Flutter Cupertino Restaurant and food application using firebase and clean architecture.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Future Steps:
+- Domain and Data Mappers should be separated to Mapper Classes
+- Firebase conversions should be separated to Converters classes
+- Cache the data
+- Use firebase auth for login
+- Favourite should show data only for logged in user
+- Enable guests visits; to enable guests to view the application without requiring them to log in
+- Add DAOs layer for fireStore
+- Separate layers into separate modules
+- Separate navigation to a separate module / classes
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Features to be added:
+- OnBoarding
+- Login and User Authentication
+- Enable Guests Login
+- Add favourite Icon toggle (shows state of favourite in item details)
+- Add notices for actions
+- Group items by count
