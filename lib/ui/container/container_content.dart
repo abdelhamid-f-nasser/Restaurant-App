@@ -44,8 +44,6 @@ class HomeContent extends StatelessWidget {
       },
     );
   }
-
-  //Todo: Add real pages
   final _tabItems = {
     MainRoutes.search.name: const SearchFoodPage(),
     MainRoutes.favourite.name: const UserFavouritesPage(),

@@ -16,15 +16,16 @@ class ContainerPage extends StatelessWidget {
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         middle: Text(tabName),
-        trailing: CupertinoButton(onPressed: ()=> _onCardPressed(context), child: const Icon(CupertinoIcons.cart)),
+        trailing: CupertinoButton(
+          onPressed: () => _onCardPressed(context),
+          child: const Icon(CupertinoIcons.cart),
+        ),
       ),
-      //Todo: Wrap widget with Providers
       child: HomeContent(
         tabName: tabName,
       ),
     );
   }
-
 
   void _onCardPressed(BuildContext context) {
     context.pushNamed(MainRoutes.cart.name);
