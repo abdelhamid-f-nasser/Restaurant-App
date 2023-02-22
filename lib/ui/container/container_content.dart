@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:restaurant_app/ui/food_search/search_food_page.dart';
+import 'package:restaurant_app/ui/user_favourites/index.dart';
 import 'package:restaurant_app/utils/router/index.dart';
 
 class HomeContent extends StatelessWidget {
@@ -47,8 +48,6 @@ class HomeContent extends StatelessWidget {
   //Todo: Add real pages
   final _tabItems = {
     MainRoutes.search.name: const SearchFoodPage(),
-    MainRoutes.favourite.name: const ColoredBox(
-      color: CupertinoColors.systemTeal,
-    ),
+    MainRoutes.favourite.name: const UserFavouritesPage(),
   };
 }
