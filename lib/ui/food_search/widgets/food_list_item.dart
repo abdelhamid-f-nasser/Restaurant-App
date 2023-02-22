@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:restaurant_app/domain/entity/index.dart';
 import 'package:restaurant_app/ui/cart/cubit/index.dart';
-import 'package:restaurant_app/ui/user_favourites/cubit/user_favourites_cubit.dart';
 import 'package:restaurant_app/utils/index.dart';
 import 'package:restaurant_app/utils/router/index.dart';
 
@@ -12,14 +11,14 @@ class FoodListItem extends StatelessWidget {
     super.key,
     required this.item,
     this.isAddToCartButtonShowing = false,
-    this.isAddToFavouritesButtonShowing = false,
     this.previousPageTitle,
+    this.itemCount,
   });
 
   final FoodItem item;
   final bool? isAddToCartButtonShowing;
-  final bool? isAddToFavouritesButtonShowing;
   final String? previousPageTitle;
+  final int? itemCount;
 
   factory FoodListItem.withCartButton({
     required FoodItem item,
@@ -31,13 +30,14 @@ class FoodListItem extends StatelessWidget {
         previousPageTitle: previousPageTitle,
       );
 
-  factory FoodListItem.withFavouritesButton({
+  factory FoodListItem.cartItem({
     required FoodItem item,
     String? previousPageTitle,
+    int? itemCount,
   }) =>
       FoodListItem(
         item: item,
-        isAddToFavouritesButtonShowing: true,
+        itemCount: itemCount,
         previousPageTitle: previousPageTitle,
       );
 
@@ -50,7 +50,7 @@ class FoodListItem extends StatelessWidget {
         children: [
           Container(
             width: context.w * .25,
-            height: context.h * .2,
+            height: context.h * .1,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: CachedNetworkImageProvider(item.imageUrl ?? ''),
@@ -88,6 +88,19 @@ class FoodListItem extends StatelessWidget {
             ),
           ),
           Visibility(
+            visible: itemCount != null,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 12),
+              child: Text(
+                itemCount?.toString() ?? '1',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
+          Visibility(
             visible: isAddToCartButtonShowing ?? false,
             child: CupertinoButton(
               child: const Icon(
@@ -96,32 +109,10 @@ class FoodListItem extends StatelessWidget {
               onPressed: () => _addFoodItemToCart(context, item),
             ),
           ),
-          Visibility(
-            visible: isAddToFavouritesButtonShowing ?? false,
-            child: Padding(
-              padding: EdgeInsetsDirectional.only(start: context.w * .14),
-              child: CupertinoButton(
-                child: const Icon(
-                  CupertinoIcons.heart_fill,
-                  color: CupertinoColors.destructiveRed,
-                ),
-                onPressed: () => _toggleFavouriteFood(context, item),
-              ),
-            ),
-          )
         ],
       ),
     );
   }
-
-  void _toggleFavouriteFood(
-    BuildContext context,
-    FoodItem item,
-  ) =>
-      context.read<UserFavouritesCubit>().toggleFavouriteFood(
-            Constants.userId,
-            item,
-          );
 
   void _navigateToItemDetail({
     required FoodItem item,

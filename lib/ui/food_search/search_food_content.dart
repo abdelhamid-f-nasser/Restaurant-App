@@ -18,19 +18,34 @@ class SearchFoodContent extends StatelessWidget {
           case PageState.loading:
             return const CupertinoActivityIndicator();
           case PageState.success:
-            return ListView.separated(
-              itemCount: state.foodList.length,
-              itemBuilder: (context, index) {
-                final FoodItem currentItem = state.foodList[index];
-                return Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: FoodListItem.withCartButton(
-                    item: currentItem,
-                    previousPageTitle: 'search',
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => const Divider(),
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  children: [
+                    CupertinoSearchTextField(
+                      onChanged: (value) =>
+                          _onSearchTextChanged(context, query: value),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                        itemCount: state.filteredFoodItem.length,
+                        itemBuilder: (context, index) {
+                          final FoodItem currentItem = state.filteredFoodItem[index];
+                          return FoodListItem.withCartButton(
+                            item: currentItem,
+                            previousPageTitle: 'search',
+                          );
+                        },
+                        separatorBuilder: (context, index) => const Divider(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             );
           case PageState.error:
             return const Text('There is an error');
@@ -38,4 +53,10 @@ class SearchFoodContent extends StatelessWidget {
       },
     );
   }
+
+  void _onSearchTextChanged(
+    BuildContext context, {
+    required String query,
+  }) =>
+      context.read<FoodCubit>().searchItems(query);
 }
